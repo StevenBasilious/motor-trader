@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Car Details - Motor Trader</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="wrapper">
+    <header>
+        <nav class="navbar">
+            <a href="home.html" class="logo"><img src="Images/logo.png" alt="Logo" style="width: 150px;"></a>
+            <ul>
+                <li><a href="buy.html">Buy Car</a></li>
+                <li><a href="sell.html">Sell Car</a></li>
+                <li><a href="insurance.html">Car Insurance</a></li>
+                <li><a href="mot.html">MOT Services</a></li>
+                <button><a href="account.html">Account</a></button>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Car Details</h2>
+            <form id="carDetailsForm" action="submit.html">
+                <label for="carMileage">Mileage:</label>
+                <input type="number" id="carMileage" name="carMileage" required>
+                <label for="registration">Registration:</label>
+                <input type="text" id="registration" name="registration" required>
+                <label for="owners">Number of Owners:</label>
+                <input type="number" id="owners" name="owners" required>
+                <label for="fuelType">Fuel Type:</label>
+                <input type="text" id="fuelType" name="fuelType" required>
+                <label for="bodyType">Body Type:</label>
+                <input type="text" id="bodyType" name="bodyType" required>
+                <label for="engine">Engine:</label>
+                <input type="text" id="engine" name="engine" required>
+                <label for="gearbox">Gearbox:</label>
+                <input type="text" id="gearbox" name="gearbox" required>
+                <label for="doors">Number of Doors:</label>
+                <input type="number" id="doors" name="doors" required>
+                <button type="button" onclick="window.history.back()">Back</button>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Motor Trader</p>
+    </footer>
+</div>
+</body>
+</html>

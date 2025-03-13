@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Seller Details - Motor Trader</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="wrapper">
+    <header>
+        <nav class="navbar">
+            <a href="home.html" class="logo"><img src="Images/logo.png" alt="Logo" style="width: 150px;"></a>
+            <ul>
+                <li><a href="buy.html">Buy Car</a></li>
+                <li><a href="sell.html">Sell Car</a></li>
+                <li><a href="insurance.html">Car Insurance</a></li>
+                <li><a href="mot.html">MOT Services</a></li>
+                <button><a href="account.html">Account</a></button>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Seller Details</h2>
+            <form id="sellerDetailsForm" action="car-details.html">
+                <label for="sellerNumber">Phone Number:</label>
+                <input type="tel" id="sellerNumber" name="sellerNumber" required>
+                <label for="sellerEmail">Email:</label>
+                <input type="email" id="sellerEmail" name="sellerEmail" required>
+                <label for="sellerLocation">Location:</label>
+                <input type="text" id="sellerLocation" name="sellerLocation" required>
+                <button type="button" onclick="window.history.back()">Back</button>
+                <button type="submit">Next</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Motor Trader</p>
+    </footer>
+</div>
+</body>
+</html>
