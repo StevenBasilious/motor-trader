@@ -82,8 +82,8 @@ $result = mysqli_query($conn, $query);
                     <input type="number" id="carMileage" name="carMileage" required>
                     <label for="registration">Registration:</label>
                     <input type="text" id="registration" name="registration" required>
-                    <label for="owners">Number of Owners:</label>
-                    <input type="number" id="owners" name="owners" required>
+                    <!-- <label for="owners">Number of Owners:</label>
+                    <input type="number" id="owners" name="owners" required> -->
                     <label for="fuelType">Fuel Type:</label>
                     <input type="text" id="fuelType" name="fuelType" required>
                     <label for="bodyType">Body Type:</label>
