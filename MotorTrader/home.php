@@ -1,92 +1,162 @@
 <?php
-// Start the session at the very top of the script
+// Start session
 session_start();
 
 // Enable error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Include database connection
-include("database.php");
+// Database connection using PDO
+function getConnection() {
+    try {
+        $conn = new PDO('mysql:host=localhost;dbname=motorTraderDB;charset=utf8', 'root', '');
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $conn;
+    } catch (PDOException $exception) {
+        die("Oh no, there was a problem: " . $exception->getMessage());
+    }
+}
 
 // Fetch all cars from the database
+$conn = getConnection();
 $query = "SELECT * FROM cars ORDER BY created_at DESC";
-$result = mysqli_query($conn, $query);
+$result = $conn->query($query);
+
+// Search functionality
+function getAllCars($search = '') {
+    $conn = getConnection();
+    $query = "SELECT * FROM cars WHERE make LIKE :make";
+    $stmt = $conn->prepare($query);
+    $stmt->bindValue(':make', "%$search%", PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+$search = isset($_POST["search"]) ? trim($_POST["search"]) : '';
+$cars = $search ? getAllCars($search) : [];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Home</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylee.css">
-    <link rel="stylesheet" href="footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        
+.search-bar{
+    width: 100%;
+    margin: 0 20px 20px;
+}
+
+form{
+    background-color: #fff;
+    width: 600px;
+    height: 55px;
+    display: flex;
+    border: 1px solid #1D4F91;
+}
+
+form input{
+    flex: 1;
+    border: none;
+    outline: none;
+    color: #1D4F91;
+}
+
+form button{
+    background-color: #1D4F91;
+    padding: 10px 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+form button:hover{
+    background-color:rgb(18, 60, 116);
+}
+
+form .fa{
+    align-self: center;
+    padding: 10px 20px;
+    color: #1D4F91;
+}
+    </style>
 </head>
 <body>
-<div id="wrapper">
+ 
+
     <nav class="navbar">
         <div class="logo">
             <a href="home.php"><img src="Images/logo.png" alt="Motor Trade Logo"></a>
         </div>
         <ul class="nav-links">
-                <li><a href="home.php">Home</a></li>
-                <li><a href="buy.php">Buy Car</a></li>
-                <li><a href="sell.php">Sell Car</a></li>
-                <li><a href="insurance.php">Car Insurance</a></li>
-                <li><a href="mot.php">MOT Services</a></li>
+            <li><a href="home.php">Home</a></li>
+            <li><a href="sell.php">Sell Car</a></li>
+            <li><a href="insurance.php">Car Insurance</a></li>
+            <li><a href="Reviews.php">Reviews</a></li>
             </ul>
-        <div class="login-btn">
+            
+            <div class="login-btn">
             <?php if (isset($_SESSION['user_name'])): ?>
-                <span>Hello, <?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
-                <a href="logout.php">Logout</a> <!-- Add a logout link -->
-            <?php else: ?>
+                <span>Hello, <?= htmlspecialchars($_SESSION['user_name']); ?></span>
+                <a href="logout.php">Logout</a>
+                <?php else: ?>
                 <a href="account.html">Account</a>
             <?php endif; ?>
         </div>
     </nav>
 
-    <main>
-        <form class="basic-search" action="#">
-            <div class="inner-form">
-                <div class="basic-search">
-                    <input class="search" type="text" placeholder="Search...">
-                    <button type="submit">Search</button>
-                </div>
-                <div class="advanced-search">
-                    <span class="desc">Car Search Form</span>
-                    <div class="row1">
-                        <div class="input-field"></div>
-                    </div>
-                    <div class="row2"></div>
-                    <div class="row3"></div>
-                </div>
-            </div>
+    <div class="search-bar">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <i class="fa fa-search"></i>
+            <input type="text" id="search" name="search" placeholder="Search here...">
+            <button type="submit" class="submit">Search</button>
         </form>
-    </main>
+    </div>
+
+    <div class="car-grid">
+        <?php if (!empty($cars)): ?>
+            <?php foreach ($cars as $car): ?>
+                <div class="car-item">
+                    <img src="Images/<?= htmlspecialchars($car['image']); ?>" alt="<?= htmlspecialchars($car['make']); ?>" width="300">
+                    <h2><?= htmlspecialchars($car['make']) . " " . htmlspecialchars($car['model']); ?></h2>
+                    <p><strong>Year:</strong> <?= htmlspecialchars($car['year']); ?></p>
+                    <p><strong>Mileage:</strong> <?= number_format($car['mileage']); ?> km</p>
+                    <p><strong>Price:</strong> $<?= number_format($car['price'], 2); ?></p>
+                    <a href="car.php?id=<?= $car['id']; ?>" class="details-btn">View Details</a>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No cars found.</p>
+        <?php endif; ?>
+    </div>
 
     <div class="car-listings">
-    <?php while($car = mysqli_fetch_assoc($result)): ?>
-        <div class="car-card">
-            <a href="car_details.php?id=<?php echo $car['id']; ?>">
-                <img src="Images/<?php echo htmlspecialchars($car['image']); ?>" alt="<?php echo htmlspecialchars($car['make']); ?>" width="300">
-            </a>
-            <h2><?php echo htmlspecialchars($car['make']) . " " . htmlspecialchars($car['model']); ?></h2>
-            <p><strong>Year:</strong> <?php echo htmlspecialchars($car['year']); ?></p>
-            <p><strong>Mileage:</strong> <?php echo number_format($car['mileage']); ?> km</p>
-            <p><strong>Price:</strong> $<?php echo number_format($car['price'], 2); ?></p>
-            <a href="car.php?id=<?php echo $car['id']; ?>" class="details-btn">View Details</a>
-        </div>
-    <?php endwhile; ?>
-</div>
+        <?php while ($car = $result->fetch(PDO::FETCH_ASSOC)): ?>
+            <div class="car-card">
+                <a href="car.php?id=<?= $car['id']; ?>">
+                    <img src="Images/<?= htmlspecialchars($car['image']); ?>" alt="<?= htmlspecialchars($car['make']); ?>" width="300">
+                </a>
+                <h2><?= htmlspecialchars($car['make']) . " " . htmlspecialchars($car['model']); ?></h2>
+                <p><strong>Year:</strong> <?= htmlspecialchars($car['year']); ?></p>
+                <p><strong>Mileage:</strong> <?= number_format($car['mileage']); ?> km</p>
+                <p><strong>Price:</strong> $<?= number_format($car['price'], 2); ?></p>
+                <a href="car.php?id=<?= $car['id']; ?>" class="details-btn">View Details</a>
+            </div>
+        <?php endwhile; ?>
+    </div>
+ </div>
 
-
-    <footer class="footer">
+ <footer class="footer">
     <div class="footer-con">
         <div class="footer-row">
             <div class="footer-col">
-                <h2>MotorTrader</h2> <!-- I used h2 you can change it to h3 or..  -->
+                <h2>MotorTrader</h2>
                 <ul>
                     <li><a href="#">About MotorTrader</a></li>
                     <li><a href="#">Contact us</a></li>
@@ -98,7 +168,6 @@ $result = mysqli_query($conn, $query);
                 <h2>Get Help</h2>
                 <ul>
                     <li><a href="#">Help & FAQ</a></li>
-                    <li><a href="#"></a></li>
                     <li><a href="#">Customer service</a></li>
                     <li><a href="#">Careers</a></li>
                 </ul>
@@ -118,12 +187,12 @@ $result = mysqli_query($conn, $query);
                     <a href="#"><i class="fab fa-twitter"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <p>Copyright&copy; 2025 Motor Trader</p>
                 </div>
             </div>
-            
         </div>
     </div>
-</footer>
- 
+ </footer>
+
 </body>
 </html>

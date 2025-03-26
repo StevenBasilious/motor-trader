@@ -44,7 +44,7 @@ VALUES
 ('David Wilson', 'david@example.com', 'password111', '777654321');
 
 -- Insert cars
-INSERT INTO cars (make, model, year, mileage, price, description, image, registration, owners, fuel_type, body_type, engine, gearbox, doors)
+INSERT INTO cars (make, model, year, mileage, price, description, image, registration, owners, fuel_type, body_type, engine, gearbox, doors, images)
 VALUES
 ('Toyota', 'Corolla', 2018, 45000, 15000.00, 'Well-maintained, single owner, great condition.', 'e761b09d9bcc49e18a88f27b173ea7e0.jpg', 'AB12 CDE', 1, 'Petrol', 'Sedan', '1.8L', 'Automatic', 4),
 ('Honda', 'Civic', 2017, 60000, 14000.00, 'Sporty and fuel-efficient, clean interior.', 'honda_civic.jpg', 'XY34 ZGH', 2, 'Diesel', 'Sedan', '1.6L', 'Manual', 4),

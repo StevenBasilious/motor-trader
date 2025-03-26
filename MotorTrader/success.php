@@ -1,34 +1,19 @@
 <?php
-// Start the session at the very top of the script
 session_start();
-
-// Enable error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// Include database connection
-include("database.php");
-
-// Fetch all cars from the database
-$query = "SELECT * FROM cars ORDER BY created_at DESC";
-$result = mysqli_query($conn, $query);
 ?>
-
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
 <head>
-<title></title>
-<meta http-equiv="content-type" content="text/html;charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="stylee.css">
-<link rel="stylesheet" href="footer.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Success</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylee.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
-
 <body>
-<div id="wrapper">
 
-<nav class="navbar">
+<header>
+    <nav class="navbar">
         <div class="logo">
             <a href="home.php"><img src="Images/logo.png" alt="Motor Trade Logo"></a>
         </div>
@@ -48,12 +33,18 @@ $result = mysqli_query($conn, $query);
             <?php endif; ?>
         </div>
     </nav>
-                        
-    <footer class="footer">
+    </header>
+
+    <h2>Car Listed Successfully!</h2>
+    <p>Your car has been successfully listed for sale.</p>
+    <a href="home.php">Go to Homepage</a>
+
+    
+<footer class="footer">
     <div class="footer-con">
         <div class="footer-row">
             <div class="footer-col">
-                <h2>MotorTrader</h2> <!-- I used h2 you can change it to h3 or..  -->
+                <h2>MotorTrader</h2>
                 <ul>
                     <li><a href="#">About MotorTrader</a></li>
                     <li><a href="#">Contact us</a></li>
@@ -65,7 +56,6 @@ $result = mysqli_query($conn, $query);
                 <h2>Get Help</h2>
                 <ul>
                     <li><a href="#">Help & FAQ</a></li>
-                    <li><a href="#"></a></li>
                     <li><a href="#">Customer service</a></li>
                     <li><a href="#">Careers</a></li>
                 </ul>
@@ -85,13 +75,14 @@ $result = mysqli_query($conn, $query);
                     <a href="#"><i class="fab fa-twitter"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <p>Copyright&copy; 2025 Motor Trader</p>
                 </div>
             </div>
-            
         </div>
     </div>
-    </footer>
-</div> 
+</footer>
 
 </body>
+
+
 </html>
