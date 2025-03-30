@@ -49,8 +49,8 @@ session_start();
     </nav>
     </header>
     <fieldset>
-    <h2>Car Listed Successfully!</h2>
-    <p>Your car has been successfully listed for sale.</p>
+    <h2>Message sent to the seller</h2>
+    <p>They’ll be in touch, please remember to check your junk or spam folders.</p>
     <button type="submit"><a href="home.php">Go to Homepage</a></button>
 
     </fieldset>

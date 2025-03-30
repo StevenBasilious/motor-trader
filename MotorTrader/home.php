@@ -123,7 +123,12 @@ form .fa{
         <?php if (!empty($cars)): ?>
             <?php foreach ($cars as $car): ?>
                 <div class="car-item">
-                    <img src="Images/<?= htmlspecialchars($car['image']); ?>" alt="<?= htmlspecialchars($car['make']); ?>" width="300">
+                <?php
+$images = explode(",", $car['images']);
+$firstImage = $images[0] ?? 'default.jpg'; // fallback if empty
+?>
+<img src="Images/<?= htmlspecialchars($firstImage); ?>" alt="<?= htmlspecialchars($car['make']); ?>">
+" alt="<?= htmlspecialchars($car['make']); ?>" width="300">
                     <h2><?= htmlspecialchars($car['make']) . " " . htmlspecialchars($car['model']); ?></h2>
                     <p><strong>Year:</strong> <?= htmlspecialchars($car['year']); ?></p>
                     <p><strong>Mileage:</strong> <?= number_format($car['mileage']); ?> km</p>
@@ -134,23 +139,28 @@ form .fa{
         <?php else: ?>
             <p>No cars found.</p>
         <?php endif; ?>
-    </div>
+     </div>
 
-    <div class="car-listings">
-        <?php while ($car = $result->fetch(PDO::FETCH_ASSOC)): ?>
-            <div class="car-card">
-                <a href="car.php?id=<?= $car['id']; ?>">
-                    <img src="Images/<?= htmlspecialchars($car['image']); ?>" alt="<?= htmlspecialchars($car['make']); ?>" width="300">
-                </a>
-                <h2><?= htmlspecialchars($car['make']) . " " . htmlspecialchars($car['model']); ?></h2>
-                <p><strong>Year:</strong> <?= htmlspecialchars($car['year']); ?></p>
-                <p><strong>Mileage:</strong> <?= number_format($car['mileage']); ?> km</p>
-                <p><strong>Price:</strong> $<?= number_format($car['price'], 2); ?></p>
-                <a href="car.php?id=<?= $car['id']; ?>" class="details-btn">View Details</a>
-            </div>
-        <?php endwhile; ?>
-    </div>
+     <div class="car-listings"> 
+    <?php while ($car = $result->fetch(PDO::FETCH_ASSOC)): ?>
+        <div class="car-card">
+            <a href="car.php?id=<?= $car['id']; ?>">
+                <?php
+                $images = explode(",", $car['images']);
+                $firstImage = $images[0] ?? 'default.jpg';
+                ?>
+                <img src="Images/<?= htmlspecialchars($firstImage); ?>" alt="<?= htmlspecialchars($car['make']); ?>" width="300">
+            </a>
+            <h2><?= htmlspecialchars($car['make']) . " " . htmlspecialchars($car['model']); ?></h2>
+            <p><strong>Year:</strong> <?= htmlspecialchars($car['year']); ?></p>
+            <p><strong>Mileage:</strong> <?= number_format($car['mileage']); ?> km</p>
+            <p><strong>Price:</strong> $<?= number_format($car['price'], 2); ?></p>
+            <a href="car.php?id=<?= $car['id']; ?>" class="details-btn">View Details</a>
+        </div>
+     <?php endwhile; ?>
  </div>
+
+          </div>
 
  <footer class="footer">
     <div class="footer-con">

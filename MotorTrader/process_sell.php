@@ -19,26 +19,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gearbox = mysqli_real_escape_string($conn, $_POST['gearbox']);
     $doors = intval($_POST['doors']);
 
-    // Handle multiple image uploads
-    $image_paths = [];
     $uploadDir = "Images/";
+    $image_paths = [];
 
     foreach ($_FILES['carPhotos']['tmp_name'] as $key => $tmp_name) {
-        $fileName = basename($_FILES['carPhotos']['name'][$key]);
-        $targetFilePath = $uploadDir . $fileName;
-        
-        // Move uploaded file
-        if (move_uploaded_file($tmp_name, $targetFilePath)) {
-            $image_paths[] = $fileName;
+        $fileName = time() . "_" . basename($_FILES['carPhotos']['name'][$key]); // avoid overwrite
+        $targetPath = $uploadDir . $fileName;
+
+        if (move_uploaded_file($tmp_name, $targetPath)) {
+            $image_paths[] = $fileName; // store filename only (not full path)
         }
     }
 
-    // Store images as comma-separated values
     $image_list = implode(",", $image_paths);
 
-    // Insert into database
-    $query = "INSERT INTO cars (make, model, year, mileage, price, description, image, registration, owners, fuel_type, body_type, engine, gearbox, doors) 
-          VALUES ('$make', '$model', $year, $mileage, $price, '$description', '$image_list', '$registration', 1, '$fuel_type', '$body_type', '$engine', '$gearbox', $doors)";
+    // Insert into DB – NOTICE: no `image` column anymore
+    $query = "INSERT INTO cars (make, model, year, mileage, price, description, registration, owners, fuel_type, body_type, engine, gearbox, doors, created_at, images) 
+              VALUES ('$make', '$model', $year, $mileage, $price, '$description', '$registration', 1, '$fuel_type', '$body_type', '$engine', '$gearbox', $doors, NOW(), '$image_list')";
 
     if (mysqli_query($conn, $query)) {
         header("Location: success.php");

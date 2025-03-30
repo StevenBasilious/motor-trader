@@ -205,6 +205,7 @@ exit;
         <p><strong>Description:</strong> <?php echo htmlspecialchars($car['description']); ?></p>
         
         <a class="back-btn" href="home.php">← Back to Home</a>
+        <a class="back-btn" href="SellerM.php">Message Seller</a>
     </div>
 </div>
 <footer class="footer">

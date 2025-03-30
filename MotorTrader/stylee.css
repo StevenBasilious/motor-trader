@@ -52,7 +52,7 @@ body {
 /* Login Button */
 .login-btn a {
     background-color: #FFC107;  /* Gold color for contrast */
-    color: black;
+    color: rgb(248, 243, 243);
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
@@ -184,51 +184,7 @@ body {
     color: #3c3e9b;
     background-color: #ffffff;
 }
-/* wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww */
-/* Search bar */
-/* 
-.search-bar{
-    width: 100%;
-    margin: 0 20px 20px;
-}
 
-form{
-    background-color: #fff;
-    width: 600px;
-    height: 55px;
-    display: flex;
-    border: 1px solid #5f60b6;
-}
-
-form input{
-    flex: 1;
-    border: none;
-    outline: none;
-    color: #3c3e9b;
-}
-
-form button{
-    background-color: #3c3e9b;
-    padding: 10px 50px;
-    border: none;
-    outline: none;
-    color: #fff;
-    letter-spacing: 1px;
-    cursor: pointer;
-}
-
-form button:hover{
-    background-color: #ebcc34;
-}
-
-form .fa{
-    align-self: center;
-    padding: 10px 20px;
-    color: #3c3e9b;
-} */
-/* llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll */
-
-/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
 
 /* Center Main Content */
 .reviews {
