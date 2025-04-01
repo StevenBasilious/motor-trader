@@ -168,7 +168,7 @@ exit;
             
             <div class="login-btn">
             <?php if (isset($_SESSION['user_name'])): ?>
-                <span>Hello, <?= htmlspecialchars($_SESSION['user_name']); ?></span>
+                <span style="color: white;">Hello, <?= htmlspecialchars($_SESSION['user_name']); ?></span>
                 <a href="logout.php">Logout</a>
                 <?php else: ?>
                 <a href="account.html">Account</a>
@@ -193,8 +193,8 @@ exit;
     
     <div class="details">
         <h2><?php echo htmlspecialchars($car['make']) . " " . htmlspecialchars($car['model']); ?> (<?php echo htmlspecialchars($car['year']); ?>)</h2>
-        <p class="price">$<?php echo number_format($car['price'], 2); ?></p>
-        <p><strong>Mileage:</strong> <?php echo htmlspecialchars($car['mileage']); ?> km</p>
+        <p class="price">£<?php echo number_format($car['price'], 2); ?></p>
+        <p><strong>Mileage:</strong> <?php echo htmlspecialchars($car['mileage']); ?> mile</p>
         <p><strong>Registration:</strong> <?php echo htmlspecialchars($car['registration'] ?? 'N/A'); ?></p>
         <p><strong>Number of Owners:</strong> <?php echo htmlspecialchars($car['owners'] ?? 'N/A'); ?></p>
         <p><strong>Fuel Type:</strong> <?php echo htmlspecialchars($car['fuel_type'] ?? 'N/A'); ?></p>

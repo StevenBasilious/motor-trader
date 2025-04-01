@@ -1,28 +1,18 @@
 <?php
-// Start the session at the very top of the script
 session_start();
 
-// Enable error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// Include database connection
-include("database.php");
-
-// Fetch all cars from the database
-$query = "SELECT * FROM cars ORDER BY created_at DESC";
-$result = mysqli_query($conn, $query);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang = "en">
 <head>
-    <title>Sell Your Car - Motor Trader</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="stylee.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <style>
+<title></title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="quote.css">
+<link rel="stylesheet" href="stylee.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style>
         /* Form Container */
 #sell-car {
   background-color: #ffffff;
@@ -101,8 +91,7 @@ button[type="submit"] {
 </head>
 
 <body>
-    <div id="wrapper">
-     <header>
+<header>
         <nav class="navbar">
             <div class="logo">
                 <a href="home.php"><img src="Images/logo.png" alt="Motor Trade Logo"></a>
@@ -123,60 +112,61 @@ button[type="submit"] {
                 <?php endif; ?>
             </div>
         </nav>
-     </header>
+    </header>
 
-     <main>
-        <section id="sell-car">
-        <h2 style="text-align: center; color: #1D4F91;">Sell Your Car</h2>
+<main>
+    <div class="quote-container">
+        <h2>Get Your Car Insurance Quote</h2>
+        <form action="quote-output.php" method="post">
+           
+            <fieldset>
+                <legend>Personal Information</legend>
+               
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+       
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </fieldset>
 
-            <form id="sellForm" action="process_sell.php" method="POST" enctype="multipart/form-data">
-                <fieldset>
-                    <legend>Find Your Car</legend>
-                    <label for="make">Make:</label>
-                    <input type="text" id="make" name="make" required>
-                    <label for="model">Model:</label>
-                    <input type="text" id="model" name="model" required>
-                    
-                    <label for="year">Year:</label>
-                    <input type="number" id="year" name="year" required min="1900" max="2025">
-                    <label for="registration">Registration:</label>
-                    <input type="text" id="registration" name="registration" required>
-                    <label for="mileage">Mileage:</label>
-                    <input type="number" id="mileage" name="mileage" required>
-                    </fieldset>
-                    <fieldset>
-                    <legend>Upload Photos</legend>
-                    <input type="file" id="carPhotos" name="carPhotos[]" accept="image/*" multiple required>
-                    </fieldset>
-                    <fieldset>
-                    <legend>Car Description</legend>
-                    <textarea id="carDescription" name="carDescription" rows="4" placeholder="Describe your car" required></textarea>
-                </fieldset>
-                <fieldset>
-        
-                    <legend>Car Details</legend>
-                    <label for="price">Price (£):</label>
-                    <input type="number" id="price" name="price" step="0.01" required>
-                    <label for="fuelType">Fuel Type:</label>
-                    <input type="text" id="fuelType" name="fuelType" required>
-                    <label for="bodyType">Body Type:</label>
-                    <input type="text" id="bodyType" name="bodyType" required>
-                    <label for="engine">Engine:</label>
-                    <input type="text" id="engine" name="engine" required>
-                    <label for="gearbox">Gearbox:</label>
-                    <input type="text" id="gearbox" name="gearbox" required>
-                    <label for="doors">Number of Doors:</label>
-                    <input type="number" id="doors" name="doors" required>
-                </fieldset>
-                <button type="submit">Submit</button>
-            </form>
-        </section>
-     </main>
-    
+            <fieldset>
+                <legend>Car Information</legend>
+               
+                <label for="car_make">Car Make</label>
+                <input type="text" id="car_make" name="car_make" required>
 
-     <footer class="footer">
-         <div class="footer-con">
-         <div class="footer-row">
+                <label for="car_model">Car Model</label>
+                <input type="text" id="car_model" name="car_model" required>
+
+                <label for="car_year">Car Year</label>
+                <input type="number" id="car_year" name="car_year" required min="1900" max="2025">
+
+                <label for="mileage">Car Mileage</label>
+                <input type="number" id="mileage" name="mileage" required min="0">
+
+                <label for="price">Price</label>
+                <input type="number" id="price" name="price" required min="0">
+
+                <label for="coverage">Coverage Type</label>
+                <select id="coverage" name="coverage_type" required>
+                    <option value="comprehensive">Comprehensive</option>
+                    <option value="third_party">Third Party</option>
+                    <option value="third_party_fire_and_theft">Third Party, Fire & Theft</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <button type="submit">Get Quote</button>
+            </fieldset>
+
+        </form>
+    </div>
+</main>
+ 
+
+<footer class="footer">
+    <div class="footer-con">
+        <div class="footer-row">
             <div class="footer-col">
                 <h2>MotorTrader</h2>
                 <ul>
@@ -213,8 +203,8 @@ button[type="submit"] {
                 </div>
             </div>
         </div>
-        </div>
-    </footer>
-    
+    </div>
+ </footer>
+
 </body>
 </html>

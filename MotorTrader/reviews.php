@@ -43,7 +43,7 @@ function getConnection() {
             
             <div class="login-btn">
             <?php if (isset($_SESSION['user_name'])): ?>
-                <span>Hello, <?= htmlspecialchars($_SESSION['user_name']); ?></span>
+                <span style="color: white;">Hello, <?= htmlspecialchars($_SESSION['user_name']); ?></span>
                 <a href="logout.php">Logout</a>
                 <?php else: ?>
                 <a href="account.html">Account</a>

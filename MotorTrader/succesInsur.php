@@ -49,8 +49,8 @@ session_start();
     </nav>
     </header>
     <fieldset>
-    <h2>Message sent to the seller</h2>
-    <p>They’ll be in touch, please remember to check your junk or spam folders.</p>
+    <h2>Car insurance Listed Successfully!</h2>
+    <p>you have got your insurance Successfully</p>
     <button type="submit"><a style="color: white;" href="home.php">Go to Homepage</a></button>
 
     </fieldset>

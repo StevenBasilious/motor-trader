@@ -103,7 +103,7 @@ form .fa{
             
             <div class="login-btn">
             <?php if (isset($_SESSION['user_name'])): ?>
-                <span>Hello, <?= htmlspecialchars($_SESSION['user_name']); ?></span>
+                <span style="color: white;">Hello, <?= htmlspecialchars($_SESSION['user_name']); ?></span>
                 <a href="logout.php">Logout</a>
                 <?php else: ?>
                 <a href="account.html">Account</a>
@@ -128,7 +128,7 @@ $images = explode(",", $car['images']);
 $firstImage = $images[0] ?? 'default.jpg'; // fallback if empty
 ?>
 <img src="Images/<?= htmlspecialchars($firstImage); ?>" alt="<?= htmlspecialchars($car['make']); ?>">
-" alt="<?= htmlspecialchars($car['make']); ?>" width="300">
+
                     <h2><?= htmlspecialchars($car['make']) . " " . htmlspecialchars($car['model']); ?></h2>
                     <p><strong>Year:</strong> <?= htmlspecialchars($car['year']); ?></p>
                     <p><strong>Mileage:</strong> <?= number_format($car['mileage']); ?> km</p>
@@ -153,8 +153,8 @@ $firstImage = $images[0] ?? 'default.jpg'; // fallback if empty
             </a>
             <h2><?= htmlspecialchars($car['make']) . " " . htmlspecialchars($car['model']); ?></h2>
             <p><strong>Year:</strong> <?= htmlspecialchars($car['year']); ?></p>
-            <p><strong>Mileage:</strong> <?= number_format($car['mileage']); ?> km</p>
-            <p><strong>Price:</strong> $<?= number_format($car['price'], 2); ?></p>
+            <p><strong>Mileage:</strong> <?= number_format($car['mileage']); ?> mile</p>
+            <p><strong>Price:</strong> £<?= number_format($car['price'], 2); ?></p>
             <a href="car.php?id=<?= $car['id']; ?>" class="details-btn">View Details</a>
         </div>
      <?php endwhile; ?>
