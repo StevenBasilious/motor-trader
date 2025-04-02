@@ -154,11 +154,11 @@ body{
     <div class="insurance-desc">
         <!-- <img class="car-background-1" src="Images/car-background-4.jpg" alt="background image"> -->
         <div class="insurance-info">
-            <h1>What is Car Insurance?</h1>
+            <h1>What is Car insurance?</h1>
             <p>Car insurance is a legal requirement, and a type of coverage that helps protect you financially if you're in an accident or your car is damaged or stolen. The type of insurance and costs all depend on the kind of car you own, your history of driving and budget, with other factors take into consideration.</p>
         </div>
         <div class="insurance-info">
-            <h1>Why is car insurnace required?</h1>
+            <h1>Why is car insurance required?</h1>
             <p>All drivers are required, by law, to insure their vehicle. As a driver you are responsible to understand that having insurance for your vehicle is manditory. Insurance can reduce the financial burden in case of an incident by covering medical bills, legal fees and repair costs.</p>
         </div>
     </div>
